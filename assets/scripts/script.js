@@ -18,6 +18,9 @@ $(function () {
 
     var userTask = $(this).prev().val();
     console.log(userTask)
+
+    // ?????????????
+    // storeTasks();
   });
 
   // This is possibly how we will store the data that the user types in the input field. 
