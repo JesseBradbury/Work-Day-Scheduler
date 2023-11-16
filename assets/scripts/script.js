@@ -10,7 +10,7 @@ $(function () {
   // useful when saving the description in local storage?
   //
 
-  $(".btn").on("click", function(){
+  $(".btn").on("click", function () {
     console.log("Button Clicked");
 
     var timeBlock = $(this).parent().attr("id");
@@ -20,22 +20,20 @@ $(function () {
     console.log(userTask)
 
     // ?????????????
-    // storeTasks();
+    function storeTasks(workTime, workTask) {
+      var savedSchedule = JSON.parse(localStorage.getItem("savedSchedule")) || [];
+
+      var newTask = {
+        workTime: timeBlock,
+        workTask: userTask
+      };
+      savedSchedule.push(newTask);
+
+      localStorage.setItem("savedSchedule", JSON.stringify(savedSchedule));
+    }
+    storeTasks(timeBlock, userTask);
+
   });
-
-  // This is possibly how we will store the data that the user types in the input field. 
-
-//   function storeTasks(workTime, workTask) {
-//     var savedSchedule = JSON.parse(localStorage.getItem("savedSchedule")) || [];
-
-//     var newTask = {
-//         workTime: timeBlock,
-//         workTask: userTask
-//     };
-//     highScores.push(newTask);
-   
-//     localStorage.setItem("savedSchedule", JSON.stringify(savedSchedule));
-// }
 
 
 
@@ -46,10 +44,44 @@ $(function () {
   // current hour in 24-hour time?
   //
 
+  // Variable for the current time
+  var currentTime = dayjs().hour();
+
+  // We need to set up some if statements that will check the time ID of the box to 
+  // the currentTime varriable. Then adds the class of past present or future. 
+
+  // We need to make the variable that will get a comparable value from the box div
+  function colorTime() {
+    if (currentTime > boxTime) {
+      // Make color green
+    }
+    if (currentTime == boxTime) {
+      // Make color red
+    }
+    if (currentTime < boxTme) {
+      // Make color gray
+    }
+  }
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
   //
 
+  $(document).ready(function () {
+    // Retrieve saved tasks from local storage
+    var savedSchedule = JSON.parse(localStorage.getItem("savedSchedule")) || [];
+
+    // Loop through each saved task
+    savedSchedule.forEach(function (task) {
+      var textarea = $("#" + task.workTime).find("textarea");
+      textarea.val(task.workTask);
+    });
+  });
+
+
   // TODO: Add code to display the current date in the header of the page.
+  var currentDate = dayjs().format("dddd, MMMM DD");
+
+  $("#currentDay").text(currentDate);
+
 });
