@@ -10,6 +10,8 @@ $(function () {
   // useful when saving the description in local storage?
   //
 
+  // This is the button logic, it stores the ID of the text box and the value 
+  // that is writen into the textentry and stores it to the local storage. 
   $(".btn").on("click", function () {
     console.log("Button Clicked");
 
@@ -34,7 +36,6 @@ $(function () {
     storeTasks(timeBlock, userTask);
 
   });
-
 
 
   // TODO: Add code to apply the past, present, or future class to each time
