@@ -10,6 +10,59 @@ $(function () {
   // useful when saving the description in local storage?
   //
 
+
+  // This is the code that creates the time boxes on the page.
+
+  // This converts the time to an AM/PM format.
+  function hourAmPm(hour) {
+    if (hour === 0) {
+      return "12AM";
+    } else if (hour === 12) {
+      return "12PM";
+    } else if (hour < 12) {
+      return hour + "AM";
+    } else {
+      return (hour - 12) + "PM";
+    }
+  }
+
+  // Start time of the Day
+  var startingTime = 9
+
+  // Loop that creates the blocks on the page 9 time currently
+  // TODO: Could add user entry so they can select tehir start and end time from a drop down menu. 
+  for (let i = 0; i < 9; i++) {
+
+    var convertedTime = hourAmPm(startingTime);
+    var scheduleBlock = $("<section></section>");
+    var blockId = "hour-" + startingTime;
+    scheduleBlock.addClass("row time-block past");
+    scheduleBlock.attr("id", blockId);
+    $(".container-lg").append(scheduleBlock);
+
+    var calendarTime = $("<section></section>");
+    calendarTime.addClass("col-2 col-md-1 hour text-center py-3")
+    calendarTime.text(convertedTime);
+    scheduleBlock.append(calendarTime);
+
+    var calendarTask = $("<textarea></textarea>");
+    calendarTask.addClass("col-8 col-md-10 description");
+    calendarTask.attr("rows", "3");
+    scheduleBlock.append(calendarTask);
+
+    var calendarSave = $("<button></button>");
+    calendarSave.addClass("btn saveBtn col-2 col-md-1");
+    calendarSave.attr("aria-label", "save");
+    scheduleBlock.append(calendarSave);
+
+    var saveAnimation = $("<i></i>");
+    saveAnimation.addClass("fas fa-save");
+    saveAnimation.attr("aria-hidden", "true");
+    calendarSave.append(saveAnimation);
+
+    startingTime++;
+  }
+
   // This is the button logic, it stores the ID of the text box and the value 
   // that is writen into the textentry and stores it to the local storage. 
   $(".btn").on("click", function () {
@@ -53,13 +106,13 @@ $(function () {
 
   // We need to make the variable that will get a comparable value from the box div
   function colorTime() {
-    if (currentTime > boxTime) {
+    if (currentTime > startingTime) {
       // Make color green
     }
-    if (currentTime == boxTime) {
+    if (currentTime == startingTime) {
       // Make color red
     }
-    if (currentTime < boxTme) {
+    if (currentTime < boxTime) {
       // Make color gray
     }
   }
