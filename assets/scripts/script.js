@@ -29,14 +29,36 @@ $(function () {
   // Start time of the Day
   var startingTime = 9
 
-  // Loop that creates the blocks on the page 9 time currently
-  // TODO: Could add user entry so they can select tehir start and end time from a drop down menu. 
-  for (let i = 0; i < 9; i++) {
+
+  var currentTime = dayjs().hour();
+
+
+  // We need to set up some if statements that will check the time ID of the box to 
+  // the currentTime varriable. Then adds the class of past present or future. 
+
+  // We need to make the variable that will get a comparable value from the box div
+  function colorTime(startingTime) {
+    // }
+    // Loop that creates the blocks on the page 9 time currently
+    // TODO: Could add user entry so they can select tehir start and end time from a drop down menu. 
+    // for (let i = 0; i < 9; i++) {
 
     var convertedTime = hourAmPm(startingTime);
     var scheduleBlock = $("<section></section>");
+    if (currentTime > startingTime) {
+      // Make color green
+      scheduleBlock.addClass("past");
+    }
+    if (currentTime === startingTime) {
+      // Make color red
+      scheduleBlock.addClass("present");
+    }
+    if (currentTime < startingTime) {
+      // Make color gray
+      scheduleBlock.addClass("future");
+    }
     var blockId = "hour-" + startingTime;
-    scheduleBlock.addClass("row time-block past");
+    scheduleBlock.addClass("row time-block");
     scheduleBlock.attr("id", blockId);
     $(".container-lg").append(scheduleBlock);
 
@@ -63,6 +85,10 @@ $(function () {
     startingTime++;
   }
 
+  for (let i = 9; i <= 17; i++) {
+    colorTime(i);
+  }
+
   // This is the button logic, it stores the ID of the text box and the value 
   // that is writen into the textentry and stores it to the local storage. 
   $(".btn").on("click", function () {
@@ -74,7 +100,7 @@ $(function () {
     var userTask = $(this).prev().val();
     console.log(userTask)
 
-    // ?????????????
+    // This stores the tasks once the save button is pressed. Tasks and the ID are saved as a Time!
     function storeTasks(workTime, workTask) {
       var savedSchedule = JSON.parse(localStorage.getItem("savedSchedule")) || [];
 
@@ -98,24 +124,24 @@ $(function () {
   // current hour in 24-hour time?
   //
 
-  // Variable for the current time
-  var currentTime = dayjs().hour();
+  // // Variable for the current time
+  // var currentTime = dayjs().hour();
 
-  // We need to set up some if statements that will check the time ID of the box to 
-  // the currentTime varriable. Then adds the class of past present or future. 
+  // // We need to set up some if statements that will check the time ID of the box to 
+  // // the currentTime varriable. Then adds the class of past present or future. 
 
-  // We need to make the variable that will get a comparable value from the box div
-  function colorTime() {
-    if (currentTime > startingTime) {
-      // Make color green
-    }
-    if (currentTime == startingTime) {
-      // Make color red
-    }
-    if (currentTime < boxTime) {
-      // Make color gray
-    }
-  }
+  // // We need to make the variable that will get a comparable value from the box div
+  // function colorTime() {
+  //   if (currentTime > startingTime) {
+  //     // Make color green
+  //   }
+  //   if (currentTime == startingTime) {
+  //     // Make color red
+  //   }
+  //   if (currentTime < boxTime) {
+  //     // Make color gray
+  //   }
+  // }
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
