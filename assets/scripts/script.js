@@ -26,22 +26,14 @@ $(function () {
     }
   }
 
-  // Start time of the Day
-  var startingTime = 9
 
-
+  // Sets the current time from Dayjs. 
   var currentTime = dayjs().hour();
 
 
-  // We need to set up some if statements that will check the time ID of the box to 
-  // the currentTime varriable. Then adds the class of past present or future. 
-
-  // We need to make the variable that will get a comparable value from the box div
+  // This is the function that creates the boxes and sets their colors 
+  // based on the time from Dayjs. 
   function colorTime(startingTime) {
-    // }
-    // Loop that creates the blocks on the page 9 time currently
-    // TODO: Could add user entry so they can select tehir start and end time from a drop down menu. 
-    // for (let i = 0; i < 9; i++) {
 
     var convertedTime = hourAmPm(startingTime);
     var scheduleBlock = $("<section></section>");
@@ -84,14 +76,29 @@ $(function () {
 
     startingTime++;
   }
-
+  // This is the loop that will create the boxes, right now it is set from 9AM to 5PM
   for (let i = 9; i <= 17; i++) {
     colorTime(i);
   }
 
+  var saveMessageDisplayed = false;
+
+  function displaySaveNotification(message) {
+    if (!saveMessageDisplayed) {
+    var saveNotification = $("<section></section>");
+    saveNotification.addClass("save-message text-center");
+    saveNotification.text(message);
+    $(".container-lg").prepend(saveNotification);
+    saveMessageDisplayed = true;
+    }
+  }
   // This is the button logic, it stores the ID of the text box and the value 
   // that is writen into the textentry and stores it to the local storage. 
   $(".btn").on("click", function () {
+    // var saveNotification = $("<p></p>")
+    // saveNotification.text("Appointment Added to localstorage &#x2713;");
+    // $(".statusBar").append(saveNotification);
+    displaySaveNotification("Appointment Added to localstorage")
     console.log("Button Clicked");
 
     var timeBlock = $(this).parent().attr("id");
