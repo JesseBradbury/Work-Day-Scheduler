@@ -104,6 +104,7 @@ $(function () {
         workTime: timeBlock,
         workTask: userTask
       };
+
       savedSchedule.push(newTask);
 
       localStorage.setItem("savedSchedule", JSON.stringify(savedSchedule));

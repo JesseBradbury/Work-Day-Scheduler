@@ -16,4 +16,4 @@ Enjoy!
 
 ![screenshot of asignment](./assets/images/sswds2.png)
 
-## [Click here to view my project!](https://jessebradbury.github.io/JavaScript-Quiz/)
+## [Click here to view my project!](https://jessebradbury.github.io/Work-Day-Scheduler/)
