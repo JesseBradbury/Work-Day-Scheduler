@@ -16,4 +16,9 @@ Enjoy!
 
 ![screenshot of asignment](./assets/images/sswds2.png)
 
+
+## Resources
+Thank you [DayJS](https://day.js.org)
+
+
 ## [Click here to view my project!](https://jessebradbury.github.io/Work-Day-Scheduler/)
